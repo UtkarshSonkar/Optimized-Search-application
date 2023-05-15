@@ -1,0 +1,35 @@
+.card-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 16rem));
+  gap: 2rem;
+  justify-content: center;
+}
+
+.card-body {
+  overflow: hidden;
+  box-shadow: 0 2px 20px gray;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: 0.4s;
+  border: 2px gray;
+}
+
+.card-image {
+  height: 12rem;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-button {
+  /* padding: 1rem; */
+  font-size: 1rem;
+  font-weight: bold;
+  /* margin: 1rem; */
+  border: 2px black;
+  background: #2d3748;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
