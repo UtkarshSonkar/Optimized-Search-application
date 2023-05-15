@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import usePrevious from "./usePrevious";
 
 const useSearch = (query: string, page: number) => {
   const [importantData, setImportantData] = useState<any>([{}]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [results, setResults] = useState<string[]>([]);
+  const prevPage = usePrevious(page);
 
   const cache = (queryVal: string) => {
     !results.includes(queryVal) && results.push(queryVal);
@@ -21,6 +23,7 @@ const useSearch = (query: string, page: number) => {
   useEffect(() => {
     setLoading(true);
     setError(false);
+
     const source = axios.CancelToken.source();
 
     axios
@@ -31,11 +34,20 @@ const useSearch = (query: string, page: number) => {
         }
       )
       .then((response) => {
-        response.data.photos.photo !== undefined &&
-          setImportantData((prev: any) => [
-            ...response.data.photos.photo,
-            ...prev,
-          ]);
+        if (prevPage !== page) {
+          response.data.photos.photo !== undefined &&
+            setImportantData((prev: any) => [
+              ...prev,
+              ...response.data.photos.photo,
+            ]);
+        } else {
+          response.data.photos.photo !== undefined &&
+            setImportantData((prev: any) => [
+              ...response.data.photos.photo,
+              ...prev,
+            ]);
+        }
+
         setLoading(false);
         cache(query);
       })
