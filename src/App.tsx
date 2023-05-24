@@ -30,7 +30,6 @@ function App() {
   useEffect(() => {
     forDefaultData();
   }, []);
-  console.log(defaultData);
 
   //**********************handle scrolling on page change****************************
   const handleScroll = () => {

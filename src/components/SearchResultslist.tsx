@@ -14,7 +14,6 @@ const SearchResultslist = ({ searchQuery, onClickText }: Props) => {
     var resultsListArray = JSON.parse('["unique"]');
   }
 
-  console.log(resultsListString);
   return (
     <div className="results-list">
       {resultsListArray
@@ -24,7 +23,11 @@ const SearchResultslist = ({ searchQuery, onClickText }: Props) => {
         })
         .map((data: string) => {
           return (
-            <small className="each-query" onClick={() => onClickText(data)}>
+            <small
+              key={data}
+              className="each-query"
+              onClick={() => onClickText(data)}
+            >
               {data}
             </small>
           );

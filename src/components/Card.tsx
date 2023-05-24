@@ -4,6 +4,7 @@ import Modal from "./Modal";
 
 type Props = {
   images: any;
+  key: number;
 
   //price: number;
 };

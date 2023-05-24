@@ -44,8 +44,9 @@ const useSearch = (query: string, page: number) => {
           response.data.photos.photo !== undefined &&
             setImportantData((prev: any) => [
               ...response.data.photos.photo,
-              ...prev,
+              (prev = []),
             ]);
+          document.documentElement.scrollTop = 0;
         }
 
         setLoading(false);
